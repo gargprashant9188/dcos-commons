@@ -9,12 +9,13 @@ import sdk_utils
 from tests.config import *
 
 @pytest.fixture(scope='module', autouse=True)
-def configure_package(configure_universe):
+def configure_package(configure_security):
     try:
         sdk_install.uninstall(PACKAGE_NAME)
-        sdk_utils.gc_frameworks()
-        sdk_install.install(PACKAGE_NAME, DEFAULT_TASK_COUNT,
-                        additional_options=sdk_networks.ENABLE_VIRTUAL_NETWORKS_OPTIONS)
+        sdk_install.install(
+            PACKAGE_NAME,
+            DEFAULT_TASK_COUNT,
+            additional_options=sdk_networks.ENABLE_VIRTUAL_NETWORKS_OPTIONS)
 
         yield # let the test session execute
     finally:

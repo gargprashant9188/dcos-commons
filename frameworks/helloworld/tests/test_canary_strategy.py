@@ -18,10 +18,9 @@ log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='module', autouse=True)
-def configure_package(configure_universe):
+def configure_package(configure_security):
     try:
         sdk_install.uninstall(PACKAGE_NAME)
-        sdk_utils.gc_frameworks()
         # due to canary: no tasks should launch, and suppressed shouldn't be set
         sdk_install.install(
             PACKAGE_NAME,

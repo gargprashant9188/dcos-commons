@@ -10,11 +10,9 @@ import sdk_utils
 from tests.test_utils import  *
 
 @pytest.fixture(scope='module', autouse=True)
-def configure_package(configure_universe):
+def configure_package(configure_security):
     try:
         install.uninstall(SERVICE_NAME, PACKAGE_NAME)
-        sdk_utils.gc_frameworks()
-
         install.install(
             PACKAGE_NAME,
             DEFAULT_BROKER_COUNT,

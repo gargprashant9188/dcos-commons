@@ -15,12 +15,11 @@ FOLDERED_SERVICE_NAME = sdk_utils.get_foldered_name(PACKAGE_NAME)
 
 
 @pytest.fixture(scope='module', autouse=True)
-def configure_package(configure_universe):
+def configure_package(configure_security):
     try:
         log.info("Ensure elasticsearch and kibana are uninstalled...")
         sdk_install.uninstall(KIBANA_PACKAGE_NAME)
         sdk_install.uninstall(FOLDERED_SERVICE_NAME, package_name=PACKAGE_NAME)
-        sdk_utils.gc_frameworks()
 
         sdk_upgrade.test_upgrade(
             "beta-{}".format(PACKAGE_NAME),
