@@ -23,7 +23,7 @@ TEST_JOBS = [WRITE_DATA_JOB, VERIFY_DATA_JOB, DELETE_DATA_JOB, VERIFY_DELETION_J
 @pytest.fixture(scope='module', autouse=True)
 def configure_package(configure_security):
     try:
-        sdk_install.uninstall(config.FOLDERED_SERVICE_NAME, package_name=config.config.PACKAGE_NAME)
+        sdk_install.uninstall(config.FOLDERED_SERVICE_NAME, package_name=config.PACKAGE_NAME)
         sdk_upgrade.test_upgrade(
             "beta-{}".format(config.PACKAGE_NAME),
             config.PACKAGE_NAME,

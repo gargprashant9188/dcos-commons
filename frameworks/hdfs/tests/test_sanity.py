@@ -46,7 +46,7 @@ def configure_package(configure_security):
 
 @pytest.fixture(autouse=True)
 def pre_test_setup():
-    config.check_healthy()
+    check_healthy()
 
 
 @pytest.mark.sanity

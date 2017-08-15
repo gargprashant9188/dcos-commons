@@ -4,6 +4,7 @@ import pytest
 import sdk_cmd as cmd
 import sdk_install
 import sdk_metrics
+import sdk_tasks
 import sdk_upgrade
 import sdk_utils
 from tests import config

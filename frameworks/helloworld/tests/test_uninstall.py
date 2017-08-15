@@ -2,7 +2,6 @@ import pytest
 import sdk_install
 import sdk_marathon
 import sdk_plan
-import sdk_tasks
 from tests import config
 
 
@@ -27,4 +26,4 @@ def test_uninstall():
     env['SDK_UNINSTALL'] = 'w00t'
     sdk_marathon.update_app(config.PACKAGE_NAME, marathon_config)
     sdk_plan.wait_for_completed_deployment(config.PACKAGE_NAME)
-    sdk_tasks.config.check_running(config.PACKAGE_NAME, 0)
+    config.check_running(config.PACKAGE_NAME, 0)

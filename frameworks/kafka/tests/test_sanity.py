@@ -232,7 +232,7 @@ def test_no_under_replicated_topics_exist():
 
 @pytest.mark.sanity
 def test_no_unavailable_partitions_exist():
-    partition_info = test_utils.test_utils.service_cli('topic unavailable_partitions', service_name=FOLDERED_SERVICE_NAME)
+    partition_info = test_utils.service_cli('topic unavailable_partitions', service_name=FOLDERED_SERVICE_NAME)
 
     assert len(partition_info) == 1
     assert partition_info['message'] == ''
