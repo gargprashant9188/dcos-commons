@@ -3,6 +3,7 @@ import logging
 
 import pytest
 import sdk_cmd as cmd
+import sdk_hosts
 import sdk_install
 import sdk_marathon
 import sdk_metrics
@@ -90,7 +91,7 @@ def test_xpack_toggle_with_kibana(default_populated_index):
     config.verify_commercial_api_status(False, service_name=FOLDERED_SERVICE_NAME)
 
     log.info("\n***** Test kibana with X-Pack disabled...")
-    shakedown.install_package(KIBANA_PACKAGE_NAME, options_json={
+    shakedown.install_package(config.KIBANA_PACKAGE_NAME, options_json={
         "kibana": {
             "elasticsearch_url": "http://" + sdk_hosts.vip_host(FOLDERED_SERVICE_NAME, "coordinator", 9200)
         }})
