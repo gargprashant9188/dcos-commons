@@ -84,7 +84,7 @@ def test_custom_zookeeper():
 
     # create a topic against the default zk:
     test_utils.service_cli('topic create {}'.format(DEFAULT_TOPIC_NAME), service_name=FOLDERED_SERVICE_NAME)
-    assert service_cli('topic list', service_name=FOLDERED_SERVICE_NAME) == [DEFAULT_TOPIC_NAME]
+    assert test_utils.service_cli('topic list', service_name=FOLDERED_SERVICE_NAME) == [DEFAULT_TOPIC_NAME]
 
     marathon_config = sdk_marathon.get_config(FOLDERED_SERVICE_NAME)
     # should be using default path when this envvar is empty/unset:

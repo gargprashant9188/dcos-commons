@@ -263,12 +263,12 @@ def test_modify_app_config():
     journal_ids = sdk_tasks.get_task_ids(config.FOLDERED_SERVICE_NAME, 'journal')
     name_ids = sdk_tasks.get_task_ids(config.FOLDERED_SERVICE_NAME, 'name')
 
-    config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
+    marathon_config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
     log.info('marathon config: ')
-    log.info(config)
-    expiry_ms = int(config['env'][app_config_field])
-    config['env'][app_config_field] = str(expiry_ms + 1)
-    sdk_marathon.update_app(config.FOLDERED_SERVICE_NAME, config, timeout=15 * 60)
+    log.info(marathon_config)
+    expiry_ms = int(marathon_config['env'][app_config_field])
+    marathon_config['env'][app_config_field] = str(expiry_ms + 1)
+    sdk_marathon.update_app(config.FOLDERED_SERVICE_NAME, marathon_config, timeout=15 * 60)
 
     # All tasks should be updated because hdfs-site.xml has changed
     check_healthy()
@@ -289,13 +289,13 @@ def test_modify_app_config_rollback():
     data_ids = sdk_tasks.get_task_ids(config.FOLDERED_SERVICE_NAME, 'data')
 
     old_config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
-    config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
+    marathon_config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
     log.info('marathon config: ')
-    log.info(config)
-    expiry_ms = int(config['env'][app_config_field])
+    log.info(marathon_config)
+    expiry_ms = int(marathon_config['env'][app_config_field])
     log.info('expiry ms: ' + str(expiry_ms))
-    config['env'][app_config_field] = str(expiry_ms + 1)
-    sdk_marathon.update_app(config.FOLDERED_SERVICE_NAME, config, timeout=15 * 60)
+    marathon_config['env'][app_config_field] = str(expiry_ms + 1)
+    sdk_marathon.update_app(config.FOLDERED_SERVICE_NAME, marathon_config, timeout=15 * 60)
 
     # Wait for journal nodes to be affected by the change
     sdk_tasks.check_tasks_updated(config.FOLDERED_SERVICE_NAME, 'journal', journal_ids)
@@ -310,8 +310,8 @@ def test_modify_app_config_rollback():
     sdk_tasks.check_tasks_updated(config.FOLDERED_SERVICE_NAME, 'journal', journal_ids)
     check_healthy()
 
-    config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
-    assert int(config['env'][app_config_field]) == expiry_ms
+    marathon_config = sdk_marathon.get_config(config.FOLDERED_SERVICE_NAME)
+    assert int(marathon_config['env'][app_config_field]) == expiry_ms
 
     # Data tasks should not have been affected
     sdk_tasks.check_tasks_not_updated(config.FOLDERED_SERVICE_NAME, 'data', data_ids)

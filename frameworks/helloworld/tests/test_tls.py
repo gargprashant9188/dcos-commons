@@ -247,7 +247,7 @@ def test_changing_discovery_replaces_certificate_sans(hello_world_service):
         san.value for san in san_extension.value._general_names._general_names]
 
     expected_san = (
-        '{name}-0.{config.PACKAGE_NAME}.autoip.dcos.thisdcos.directory'.format(
+        '{name}-0.{package_name}.autoip.dcos.thisdcos.directory'.format(
             name=DISCOVERY_TASK_PREFIX,
             package_name=config.PACKAGE_NAME)
         )
@@ -271,7 +271,7 @@ def test_changing_discovery_replaces_certificate_sans(hello_world_service):
         san.value for san in san_extension.value._general_names._general_names]
 
     expected_san =  (
-        '{name}-0.{config.PACKAGE_NAME}.autoip.dcos.thisdcos.directory'.format(
+        '{name}-0.{package_name}.autoip.dcos.thisdcos.directory'.format(
             name=DISCOVERY_TASK_PREFIX + '-new',
             package_name=config.PACKAGE_NAME)
         )

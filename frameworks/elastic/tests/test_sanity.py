@@ -1,12 +1,15 @@
+import json
 import logging
 
 import pytest
 import sdk_cmd as cmd
 import sdk_install
+import sdk_marathon
 import sdk_metrics
 import sdk_tasks
 import sdk_upgrade
 import sdk_utils
+import shakedown
 from tests import config
 
 log = logging.getLogger(__name__)
